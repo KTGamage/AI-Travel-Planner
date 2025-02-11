@@ -15,18 +15,18 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { doc, setDoc } from "firebase/firestore"; 
+import { db } from "@/service/firebaseConfig";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function CreateTrip() {
-
   const [place, setPlace] = useState();
-
 
   const [formData, setFormData] = useState([]);
 
-
   const [openDialog, setOpenDialog] = useState(false);
 
-
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (name, value) => {
     if (name == "noOfDays" && value > 5) {
@@ -40,20 +40,14 @@ function CreateTrip() {
     });
   };
 
-
-
   useEffect(() => {
     console.log(formData);
   }, [formData]);
-
-
 
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
     onError: (error) => console.log(error),
   });
-
-
 
   const OnGenerateTrip = async () => {
     const user = localStorage.getItem("user");
@@ -71,7 +65,7 @@ function CreateTrip() {
       toast("Please Fill the all the details");
       return;
     }
-
+    setLoading(true);
     const FINAL_PROMPT = AI_PROMPT.replace(
       "{location}",
       formData?.location?.label
@@ -81,11 +75,27 @@ function CreateTrip() {
       .replace("{budget}", formData?.budget)
       .replace("{totalDays}", formData?.noOfDays);
 
-    console.log(FINAL_PROMPT);
+    // console.log(FINAL_PROMPT);
 
     const result = await chatSession.sendMessage(FINAL_PROMPT);
 
     console.log(result?.response?.text());
+    setLoading(false);
+    SaveAiTrip(result?.response?.text());
+  };
+
+
+  const SaveAiTrip = async (TripData) => {
+    setLoading(true);
+    const user= JSON.parse(localStorage.getItem('user'));
+    const docId = Date.now().toString();
+    await setDoc(doc(db, "AITrips", docId), {
+      userSelection : formData,
+      tripData : JSON.parse(TripData),
+      userEmail : user?.email,
+      id : docId
+    });
+    setLoading(false);
   };
 
 
@@ -102,7 +112,7 @@ function CreateTrip() {
       )
       .then((resp) => {
         console.log(resp);
-        localStorage.setItem('user',JSON.stringify(resp.data));
+        localStorage.setItem("user", JSON.stringify(resp.data));
         setOpenDialog(false);
         OnGenerateTrip();
       })
@@ -110,7 +120,6 @@ function CreateTrip() {
         console.log("Error fetching user profile", error.message);
       });
   };
-
 
 
   return (
@@ -203,7 +212,13 @@ function CreateTrip() {
       </div>
 
       <div className="mt-my-10 justify-end flex">
-        <Button onClick={OnGenerateTrip}>Generate Trip</Button>
+        <Button 
+        disabled={loading}
+        onClick={OnGenerateTrip}>
+          {loading?
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin"/> :  'Generate Trip'
+          }
+          </Button>
       </div>
 
       <Dialog open={openDialog}>
