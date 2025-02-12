@@ -15,9 +15,10 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -27,6 +28,8 @@ function CreateTrip() {
   const [openDialog, setOpenDialog] = useState(false);
 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (name, value) => {
     if (name == "noOfDays" && value > 5) {
@@ -84,20 +87,19 @@ function CreateTrip() {
     SaveAiTrip(result?.response?.text());
   };
 
-
   const SaveAiTrip = async (TripData) => {
     setLoading(true);
-    const user= JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     const docId = Date.now().toString();
     await setDoc(doc(db, "AITrips", docId), {
-      userSelection : formData,
-      tripData : JSON.parse(TripData),
-      userEmail : user?.email,
-      id : docId
+      userSelection: formData,
+      tripData: JSON.parse(TripData),
+      userEmail: user?.email,
+      id: docId,
     });
     setLoading(false);
+    navigate("/view-trip/" + docId);
   };
-
 
   const GetUserProfile = (tokenInfo) => {
     axios
@@ -120,7 +122,6 @@ function CreateTrip() {
         console.log("Error fetching user profile", error.message);
       });
   };
-
 
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-70 py-5 mt-3">
@@ -212,13 +213,13 @@ function CreateTrip() {
       </div>
 
       <div className="mt-my-10 justify-end flex">
-        <Button 
-        disabled={loading}
-        onClick={OnGenerateTrip}>
-          {loading?
-            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin"/> :  'Generate Trip'
-          }
-          </Button>
+        <Button disabled={loading} onClick={OnGenerateTrip}>
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
+        </Button>
       </div>
 
       <Dialog open={openDialog}>

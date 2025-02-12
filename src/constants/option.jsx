@@ -11,7 +11,7 @@ export const SelectTravelesList=[
         title: 'A Couple',
         desc: "Two travels in tandem",
         icon: '🥂',
-        prople: '2 People'
+        people: '2 People'
     },
     {
          id:3,
@@ -51,4 +51,4 @@ export const SelectBudgetOptions=[
     },
 ]
 
-export const AI_PROMPT='Generate Travel Plan for Location : {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket pricing, Time travel each of the location for {totalDays} days with each day plan with best time to visit in JSON format.'
+export const AI_PROMPT='Generate Travel Plan for Location : {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary(type is array) with placeName, Place Details, Place Image Url, Geo Coordinates, ticket pricing, Time travel each of the location for {totalDays} days with each day plan with best time to visit in JSON format.'
