@@ -30,7 +30,7 @@ function PlaceCardItem({place}) {
     <Link to ={`https://www.google.com/maps/search/?api=1&query=${place.placeName}`}target ='_blank'>
     <div className='border rounded-xl p-5 mt-2 flex gap-5 hover:scale-105 tansition-all hover:shadow-md cursor-pointer'>
         <img src={photoUrl?photoUrl:'/placeholder.jpg'}
-        className='w-[150px] h-[150px] rounded-xl object-cover'
+        className=' h-[180px] w-[180px] rounded-xl object-cover'
         />
 
         <div>

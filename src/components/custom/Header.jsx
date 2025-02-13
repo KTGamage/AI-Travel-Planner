@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useNavigation } from "react-router-dom";
+// import { useNavigation } from "react-router-dom";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import {
   Dialog,
@@ -19,7 +19,7 @@ import { FcGoogle } from "react-icons/fc";
 function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);  
 
 
   const login = useGoogleLogin({
@@ -94,7 +94,7 @@ function Header() {
             </Popover>
           </div>
         ) : (
-          <Button onClisk={() => setOpenDialog(true)}>Sign In </Button>
+          <Button onClick={() => setOpenDialog(true)}>Sign In </Button>
         )}
       </div>
 

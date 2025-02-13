@@ -46,7 +46,7 @@ function MyTrips() {
         {userTrips?.length>0?userTrips.map((trip, index) => (
           <UserTripCardItem trip={trip} key={index}/>
         ))
-          : [1,2,3,4,5,6].map((trip, index) =>(
+          : [1,2,3,4,5,7,8,9,10].map((trip, index) =>(
             <div key={index} className="h-[180px] w-full bg-slate-200 animate animate-pulse rounded-xl"></div>
           ))
         }
