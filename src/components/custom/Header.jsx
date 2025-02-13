@@ -12,15 +12,15 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-} from "@/components/ui/dialog";    
+} from "@/components/ui/dialog";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
-
 
 function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [openDialog, setOpenDialog] = useState(false);
+
 
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
@@ -30,7 +30,6 @@ function Header() {
   useEffect(() => {
     console.log(user);
   }, []);
-
 
   const GetUserProfile = (tokenInfo) => {
     axios
@@ -56,35 +55,46 @@ function Header() {
 
   return (
     <div className="p-3 shadow-sm flex justify-between items-center px-5 ">
-      <img className="h-8" src="/logo.svg" />
+      <a href='/'><img className="h-8" src="/logo.svg"/> </a>
       <div>
         {user ? (
           <div className="flex items-center gap-3">
-            <a href = '/my-trips'>
-            <Button variant="outline" className="rounded-full text-black">
-              My Trips
-            </Button>
+
+            <a href="/create-trip">
+              <Button variant="outline" className="rounded-full text-black">
+                + Create Trip
+              </Button>
+            </a>
+
+            <a href="/my-trips">
+              <Button variant="outline" className="rounded-full text-black">
+                My Trips
+              </Button>
             </a>
 
             <Popover>
               <PopoverTrigger>
-              <img
-              src={user?.picture}
-              className="h-[35px] w-[35px] rounded-full"
-            />
+                <img
+                  src={user?.picture}
+                  className="h-[35px] w-[35px] rounded-full"
+                />
               </PopoverTrigger>
-              <PopoverContent className='text-center'>
-                <h2 className='cursor pointer' onClick={() =>{
-                  googleLogout();
-                  localStorage.clear();
-                  window.location.reload();
-                }}>Logout</h2>
+              <PopoverContent className="text-center">
+                <h2
+                  className="cursor pointer"
+                  onClick={() => {
+                    googleLogout();
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </h2>
               </PopoverContent>
             </Popover>
-
           </div>
         ) : (
-          <Button onClisk={() => setOpenDialog(true)}>Sign In  </Button>
+          <Button onClisk={() => setOpenDialog(true)}>Sign In </Button>
         )}
       </div>
 
@@ -107,7 +117,6 @@ function Header() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
-
     </div>
   );
 }
