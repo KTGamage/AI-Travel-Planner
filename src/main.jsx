@@ -72,9 +72,17 @@ const router = createHashRouter([
   }
 ]);
 
+// const isProduction = import.meta.env.PROD;
+// const redirectUri = isProduction 
+//   ? 'https://ktgamage.github.io/AI-Travel-Planner/' 
+//   : 'http://localhost:5173';
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}
+     onScriptLoadError={() => console.log("Google OAuth script failed to load")}
+  onScriptLoadSuccess={() => console.log("Google OAuth script loaded successfully")}
+    >
       <Header />
       <Toaster />
       <RouterProvider router={router} />

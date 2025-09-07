@@ -2,7 +2,7 @@
   "name": "ai-travel-planner",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://KTGamage.github.io/AI-Travel-Planner",
+  "homepage": "https://ktGamage.github.io/AI-Travel-Planner",
   "type": "module",
   "scripts": {
     "dev": "vite",
