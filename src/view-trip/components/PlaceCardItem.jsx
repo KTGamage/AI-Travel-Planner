@@ -47,7 +47,6 @@
 
 // export default PlaceCardItem;
 
-
 import { Button } from '@/components/ui/button';
 import { GetPlaceDetails, PHOTO_REF_URL } from '@/service/GlobalApi';
 import React, { useEffect, useState } from 'react';
