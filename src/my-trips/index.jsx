@@ -101,6 +101,11 @@ function MyTrips() {
     }
   };
 
+    // Handle trip deletion
+  const handleDeleteTrip = (tripId) => {
+    setUserTrips(userTrips.filter(trip => trip.id !== tripId));
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -145,7 +150,9 @@ function MyTrips() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {userTrips.map((trip, index) => (
-              <UserTripCardItem trip={trip} key={index} />
+              <UserTripCardItem key={trip.id} 
+                trip={trip} 
+                onDelete={handleDeleteTrip}/>
             ))}
           </div>
         )}
