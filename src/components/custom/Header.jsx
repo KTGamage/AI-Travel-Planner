@@ -52,7 +52,7 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <a href="/" className="flex items-center">
-            <img className="h-8 md:h-10" src="/logo.svg" alt="Logo" />
+            <img className="h-8 md:h-12" src="/src/assets/logo.svg" alt="Logo" /><span className = "font-bold text-2xl ml-2 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">GoPlan AI</span>
           </a>
 
           {/* Desktop Navigation */}
