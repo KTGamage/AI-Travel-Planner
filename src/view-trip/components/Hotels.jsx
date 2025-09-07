@@ -17,3 +17,4 @@ function Hotels({ trip }) {
 
 export default Hotels;
 
+

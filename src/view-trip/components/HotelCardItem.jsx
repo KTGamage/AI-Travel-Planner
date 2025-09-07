@@ -45,3 +45,4 @@ const [photoUrl, setPhotoUrl] = useState();
 }
 
 export default HotelCardItem;
+

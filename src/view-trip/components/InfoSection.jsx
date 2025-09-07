@@ -13,7 +13,7 @@ function InfoSection({trip}) {
         trip&&GetPlacePhoto();
     }, [trip])
 
-    const GetPlacePhoto = async() => {
+    const GetPlacePhoto = async() => { 
         const data ={  
             textQuery:trip?.userSelection?.location?.label
         }
@@ -49,3 +49,6 @@ function InfoSection({trip}) {
 }
 
 export default InfoSection
+
+
+

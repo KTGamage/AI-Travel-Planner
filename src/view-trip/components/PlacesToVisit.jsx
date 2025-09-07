@@ -27,3 +27,5 @@ function PlacesToVisit({ trip }) {
 }
 
 export default PlacesToVisit;
+
+
