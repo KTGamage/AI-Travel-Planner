@@ -21,10 +21,12 @@ function Header() {
   const [openDialog, setOpenDialog] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+const redirectUri = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
 
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
     onError: (error) => console.log(error),
+    redirect_uri: redirectUri
   });
 
   const GetUserProfile = (tokenInfo) => {
