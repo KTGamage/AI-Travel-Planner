@@ -20,6 +20,7 @@ import { db } from "@/service/firebaseConfig";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Plane, Calendar, Wallet, Users, MapPin } from "lucide-react";
+import ParticlesComponent from "@/components/ui/useParticles";
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -62,7 +63,7 @@ function CreateTrip() {
       toast.error("Please fill in all the details");
       return;
     }
-    
+
     setLoading(true);
     const FINAL_PROMPT = AI_PROMPT.replace(
       "{location}",
@@ -126,143 +127,151 @@ function CreateTrip() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="font-bold text-3xl md:text-4xl">
-            <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Tell Us Your Travel Preferences</span> 🏕️🏝️
-          </h2>
-          <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
-            Just provide some basic information, and our trip planner will generate
-            a customized itinerary based on your preferences
-          </p>
-        </div>
+    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white py-8 px-4 sm:px-6 lg:px-8">
+      <ParticlesComponent id="tsparticles" className="absolute inset-0 z-0" />
+      <div className="relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-bold text-3xl md:text-4xl">
+              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                Tell Us Your Travel Preferences
+              </span>{" "}
+              🏕️🏝️
+            </h2>
+            <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
+              Just provide some basic information, and our trip planner will
+              generate a customized itinerary based on your preferences
+            </p>
+          </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          {/* Google Api For Get Use Location Places */}
-          <div className="mb-8">
-            <div className="flex items-center mb-3">
-              <MapPin className="text-blue-500 mr-2" size={20} />
-              <h2 className="text-xl font-medium text-gray-800">
-                What is your destination of choice?
-              </h2>
+          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+            {/* Google Api For Get Use Location Places */}
+            <div className="mb-8">
+              <div className="flex items-center mb-3">
+                <MapPin className="text-blue-500 mr-2" size={20} />
+                <h2 className="text-xl font-medium text-gray-800">
+                  What is your destination of choice?
+                </h2>
+              </div>
+
+              <div className="border rounded-xl overflow-hidden">
+                <GooglePlacesAutocomplete
+                  apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
+                  selectProps={{
+                    place,
+                    onChange: (v) => {
+                      setPlace(v);
+                      handleInputChange("location", v);
+                    },
+                    styles: {
+                      control: (provided) => ({
+                        ...provided,
+                        border: "none",
+                        boxShadow: "none",
+                        padding: "8px",
+                      }),
+                    },
+                  }}
+                />
+              </div>
             </div>
-            
-            <div className="border rounded-xl overflow-hidden">
-              <GooglePlacesAutocomplete
-                apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
-                selectProps={{
-                  place,
-                  onChange: (v) => {
-                    setPlace(v);
-                    handleInputChange("location", v);
-                  },
-                  styles: {
-                    control: (provided) => ({
-                      ...provided,
-                      border: 'none',
-                      boxShadow: 'none',
-                      padding: '8px'
-                    })
-                  }
-                }}
+
+            <div className="mb-8">
+              <div className="flex items-center mb-3">
+                <Calendar className="text-blue-500 mr-2" size={20} />
+                <h2 className="text-xl font-medium text-gray-800">
+                  How many days are you planning your trip?
+                </h2>
+              </div>
+
+              <Input
+                placeholder={"Ex. 3 (max 5 days)"}
+                type="number"
+                min="1"
+                max="5"
+                className="rounded-xl py-6 text-lg"
+                onChange={(e) => handleInputChange("noOfDays", e.target.value)}
               />
             </div>
-          </div>
 
-          <div className="mb-8">
-            <div className="flex items-center mb-3">
-              <Calendar className="text-blue-500 mr-2" size={20} />
-              <h2 className="text-xl font-medium text-gray-800">
-                How many days are you planning your trip?
-              </h2>
-            </div>
-            
-            <Input
-              placeholder={"Ex. 3 (max 5 days)"}
-              type="number"
-              min="1"
-              max="5"
-              className="rounded-xl py-6 text-lg"
-              onChange={(e) => handleInputChange("noOfDays", e.target.value)}
-            />
-          </div>
+            <div className="mb-8">
+              <div className="flex items-center mb-3">
+                <Wallet className="text-blue-500 mr-2" size={20} />
+                <h2 className="text-xl font-medium text-gray-800">
+                  What is your budget?
+                </h2>
+              </div>
 
-          <div className="mb-8">
-            <div className="flex items-center mb-3">
-              <Wallet className="text-blue-500 mr-2" size={20} />
-              <h2 className="text-xl font-medium text-gray-800">
-                What is your budget?
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {SelectBudgetOptions.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleInputChange("budget", item.title)}
-                  className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-200
-                    ${formData?.budget === item.title 
-                      ? "border-blue-500 bg-blue-50 shadow-md" 
-                      : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {SelectBudgetOptions.map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleInputChange("budget", item.title)}
+                    className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-200
+                    ${
+                      formData?.budget === item.title
+                        ? "border-blue-500 bg-blue-50 shadow-md"
+                        : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
                     }
                   `}
-                >
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h2 className="font-bold text-gray-800">{item.title}</h2>
-                  <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
-                </div>
-              ))}
+                  >
+                    <div className="text-4xl mb-3">{item.icon}</div>
+                    <h2 className="font-bold text-gray-800">{item.title}</h2>
+                    <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="mb-8">
-            <div className="flex items-center mb-3">
-              <Users className="text-blue-500 mr-2" size={20} />
-              <h2 className="text-xl font-medium text-gray-800">
-                Who do you plan on traveling with?
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {SelectTravelesList.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleInputChange("traveler", item.people)}
-                  className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-200
-                    ${formData?.traveler === item.people
-                      ? "border-blue-500 bg-blue-50 shadow-md" 
-                      : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+            <div className="mb-8">
+              <div className="flex items-center mb-3">
+                <Users className="text-blue-500 mr-2" size={20} />
+                <h2 className="text-xl font-medium text-gray-800">
+                  Who do you plan on traveling with?
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {SelectTravelesList.map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleInputChange("traveler", item.people)}
+                    className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-200
+                    ${
+                      formData?.traveler === item.people
+                        ? "border-blue-500 bg-blue-50 shadow-md"
+                        : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
                     }
                   `}
-                >
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h2 className="font-bold text-gray-800">{item.title}</h2>
-                  <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
-                </div>
-              ))}
+                  >
+                    <div className="text-4xl mb-3">{item.icon}</div>
+                    <h2 className="font-bold text-gray-800">{item.title}</h2>
+                    <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="flex justify-center mt-10">
-            <Button 
-              onClick={OnGenerateTrip} 
-              disabled={loading}
-              className="rounded-full px-8 py-6 text-lg bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
-              size="lg"
-            >
-              {loading ? (
-                <>
-                  <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin mr-2" />
-                  Generating Your Trip...
-                </>
-              ) : (
-                <>
-                  <Plane className="mr-2" size={20} />
-                  Generate Trip
-                </>
-              )}
-            </Button>
+            <div className="flex justify-center mt-10">
+              <Button
+                onClick={OnGenerateTrip}
+                disabled={loading}
+                className="rounded-full px-8 py-6 text-lg bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                size="lg"
+              >
+                {loading ? (
+                  <>
+                    <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin mr-2" />
+                    Generating Your Trip...
+                  </>
+                ) : (
+                  <>
+                    <Plane className="mr-2" size={20} />
+                    Generate Trip
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
