@@ -3,7 +3,7 @@
   command = "npm run build"
 
 [build.environment]
-  VITE_GOOGLE_OAUTH_CLIENT_ID = "962583628582-fg1n2p2qq8msoobfc0he0kkboasfthu7.apps.googleusercontent.com"
+  VITE_GOOGLE_OAUTH_CLIENT_ID = "974301831607-5svojrrjj2i39k9ia5386o4opb27ihu9.apps.googleusercontent.com"
 
 [[redirects]]
   from = "/oauth2callback"
