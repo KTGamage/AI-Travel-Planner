@@ -108,7 +108,7 @@ function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900"
+              className="p-2 rounded-md text-white hover:text-gray-900 bg-gradient-to-r from-orange-500 to-red-500"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
