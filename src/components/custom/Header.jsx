@@ -21,7 +21,10 @@ function Header() {
   const [openDialog, setOpenDialog] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-const redirectUri = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
+const isProduction = import.meta.env.PROD;
+const redirectUri = isProduction 
+  ? 'https://ai-travel-planner-six-cyan.vercel.app' 
+  : 'http://localhost:5173';
 
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
