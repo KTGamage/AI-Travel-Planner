@@ -21,9 +21,16 @@ function Header() {
   const [openDialog, setOpenDialog] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+const isProduction = import.meta.env.PROD;
+const redirectUri = isProduction 
+  ? 'https://goplan-ai-fe04d1.netlify.app/' 
+  : 'http://localhost:5173/';
+
+
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
     onError: (error) => console.log(error),
+    redirect_uri: redirectUri
   });
 
   const GetUserProfile = (tokenInfo) => {

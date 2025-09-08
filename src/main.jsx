@@ -29,6 +29,8 @@ const router = createBrowserRouter([
   }
 ]);
 
+const redirectUri = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
