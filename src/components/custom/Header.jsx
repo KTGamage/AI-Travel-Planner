@@ -24,7 +24,6 @@ function Header() {
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
     onError: (error) => console.log(error),
-   
   });
 
   const GetUserProfile = (tokenInfo) => {
@@ -53,7 +52,10 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <a href="/" className="flex items-center">
-            <img className="h-8 md:h-12" src="/logo.svg" alt="Logo" /><span className = "font-bold text-2xl ml-2 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">GoPlan AI</span>
+            <img className="h-8 md:h-12" src="/logo.svg" alt="Logo" />
+            <span className="font-bold text-2xl ml-2 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+              GoPlan AI
+            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -93,7 +95,7 @@ function Header() {
                 </Popover>
               </>
             ) : (
-              <Button 
+              <Button
                 onClick={() => setOpenDialog(true)}
                 className="bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-lg"
               >
@@ -118,15 +120,15 @@ function Header() {
           <div className="md:hidden py-4 space-y-4 border-t">
             {user ? (
               <>
-                <a 
-                  href="/create-trip" 
+                <a
+                  href="/create-trip"
                   className="block w-full py-2 text-center bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   + Create Trip
                 </a>
-                <a 
-                  href="/my-trips" 
+                <a
+                  href="/my-trips"
                   className="block w-full py-2 text-center border rounded-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -144,7 +146,7 @@ function Header() {
                 </button>
               </>
             ) : (
-              <Button 
+              <Button
                 onClick={() => {
                   setOpenDialog(true);
                   setIsMenuOpen(false);
@@ -159,10 +161,15 @@ function Header() {
       </div>
 
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent className="max-w-md p-8 text-center">
+        <DialogContent className="w-[90%] max-w-md p-8 text-center rounded-2xl">
           <DialogHeader>
             <DialogDescription>
-              <img src="/logo.svg" className="mx-auto h-12 mb-6" alt="Logo" />
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <img src="/logo.svg" className="h-12" alt="Logo" />
+                <span className="font-bold text-2xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                  GoPlan AI
+                </span>
+              </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Sign In With Google
               </h2>
@@ -185,9 +192,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
-
-
-
