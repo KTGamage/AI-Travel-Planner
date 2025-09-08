@@ -154,8 +154,8 @@ function CreateTrip() {
                 </h2>
               </div>
 
-              <div className="border rounded-xl overflow-hidden">
-                <GooglePlacesAutocomplete
+              <div className="border rounded-xl p-0.5">
+                <GooglePlacesAutocomplete 
                   apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
                   selectProps={{
                     place,
