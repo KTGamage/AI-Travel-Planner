@@ -1,0 +1,11 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  VITE_GOOGLE_OAUTH_CLIENT_ID = "your-client-id"
+
+[[redirects]]
+  from = "/oauth2callback"
+  to = "/.netlify/functions/auth"
+  status = 200
