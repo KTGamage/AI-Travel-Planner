@@ -1,13 +1,12 @@
 # 🌍 GoPlanAI – AI Travel Planner Application
 
-![Built with React](https://img.shields.io/badge/Built%20with-React-blue?logo=react)
-![Backend Express](https://img.shields.io/badge/Backend-Express.js-lightgrey?logo=express)
-![Database Firebase](https://img.shields.io/badge/Database-Firebase-orange?logo=firebase)
-![AI Gemini API](https://img.shields.io/badge/AI-Gemini%20API-purple?logo=google)
-![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
-![License MIT](https://img.shields.io/badge/License-MIT-green)
-![Status Active](https://img.shields.io/badge/Status-Active-success)
-
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black)
+![Gemini](https://img.shields.io/badge/Gemini-4285F4?logo=google&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+![MIT](https://img.shields.io/badge/MIT-green?logo=opensourceinitiative&logoColor=white)
+![Active](https://img.shields.io/badge/Active-success?logo=check-circle&logoColor=white)
 ---
 
 ## 📝 Description
@@ -46,12 +45,13 @@ Follow the steps below to set up and run **GoPlanAI** locally:
 
 ### 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/goplanai.git
+git clone https://github.com/KTGamage/AI-Travel-Planner.git
 ```
 
 ### 2. **Navigate to the project directory**
 ```bash
-cd goplanai
+cd AI-Travel-Planner
+
 ```
 
 ### 3. **Install dependencies**
@@ -63,14 +63,9 @@ npm install
 Create a `.env` file in the root directory and include the following environment variables:
 
 ```env
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
 VITE_GEMINI_API_KEY=your_gemini_api_key
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+VITE_GOOGLE_OAUTH_CLIENT_ID = your_google_outh_client_id
 ```
 
 ### 5. **Run the application**
@@ -83,183 +78,55 @@ npm run dev
 ## 🚀 Live Demo
 
 Experience GoPlanAI live here:  
-🔗 **https://goplanai.vercel.app**
-
----
-
-## 🖼️ Screenshots
-
-### 🏠 Home Page
-![Home Page](https://via.placeholder.com/800x450/3a86ff/ffffff?text=GoPlanAI+Home+Page)
-
-### 🧭 AI Trip Planner
-![Trip Planner](https://via.placeholder.com/800x450/8338ec/ffffff?text=AI+Trip+Planner)
-
-### 🌆 Destination Suggestions
-![Destination Suggestions](https://via.placeholder.com/800x450/ff006e/ffffff?text=Destination+Suggestions)
-
-### 🔑 Login Page
-![Login Page](https://via.placeholder.com/800x450/38b000/ffffff?text=Login+Page)
+🔗 **https://ai-travel-planner-six-cyan.vercel.app/**
 
 ---
 
 ## 📂 Project Structure
 
 ```
-GoPlanAI/
-│
-├── backend/                 # Node.js and Express.js server files
-│   ├── routes/             # API route handlers
-│   ├── controllers/        # Business logic controllers
-│   ├── middleware/         # Custom middleware
-│   ├── config/             # Configuration files
-│   └── server.js           # Main server file
-│
-├── src/                    # React frontend components and pages
-│   ├── components/         # Reusable UI components
-│   │   ├── ui/            # Shadcn UI components
-│   │   ├── Header.jsx     # Navigation header
-│   │   ├── TripForm/      # Trip creation components
-│   │   └── Itinerary/     # Itinerary display components
-│   ├── pages/              # Application pages
-│   │   ├── Home.jsx       # Landing page
-│   │   ├── CreateTrip.jsx # Trip creation page
-│   │   ├── MyTrips.jsx    # User trips page
-│   │   └── Auth/          # Authentication pages
-│   ├── hooks/              # Custom React hooks
-│   │   ├── useAuth.js     # Authentication hook
-│   │   ├── useFirestore.js # Firestore operations
-│   │   └── useGeminiAI.js # Gemini AI integration
-│   ├── context/            # React Context providers
-│   │   ├── AuthContext.js # Authentication state
-│   │   └── TripContext.js # Trip management state
-│   ├── services/           # External service integrations
-│   │   ├── firebase.js    # Firebase configuration
-│   │   ├── gemini.js      # Gemini API service
-│   │   └── googleMaps.js  # Google Maps API service
-│   ├── utils/              # Utility functions
-│   │   ├── helpers.js     # Helper functions
-│   │   └── constants.js   # Application constants
-│   └── App.jsx            # Main application component
-│
-├── public/                 # Static assets
-│   ├── images/            # Image resources
-│   ├── icons/             # Icon files
-│   └── index.html         # HTML template
-│
-├── .env                   # Environment variables
-├── package.json           # Project dependencies and scripts
-├── tailwind.config.js     # Tailwind CSS configuration
-├── vite.config.js         # Vite configuration
-└── README.md              # Project documentation
-```
-
----
-
-## 🏗️ System Architecture
-
-### Frontend Architecture
-```javascript
-// Component Hierarchy
-App
-├── AuthProvider (Context)
-├── Router
-│   ├── Header
-│   ├── Routes
-│   │   ├── / → HomePage
-│   │   ├── /create-trip → TripCreationPage
-│   │   ├── /my-trips → TripManagementPage
-│   │   └── /auth → AuthPages
-│   └── ModalManager
-```
-
-### Data Flow
-```
-User Input → React Components → Firebase Auth → Gemini API → 
-Firestore DB → Response Processing → UI Update
-```
-
----
-
-## 🔧 Core Features Implementation
-
-### 1. AI-Powered Itinerary Generation
-```javascript
-// Gemini AI Integration
-class GeminiAIService {
-  async generateItinerary(userPreferences) {
-    const prompt = this.buildPrompt(userPreferences);
-    const response = await fetch(GEMINI_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: prompt
-          }]
-        }]
-      })
-    });
-    return this.parseItineraryResponse(response);
-  }
-}
-```
-
-### 2. Firebase Integration
-```javascript
-// Firestore Operations
-class TripService {
-  async saveTrip(userId, tripData) {
-    const tripRef = await addDoc(collection(db, 'trips'), {
-      ...tripData,
-      userId,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    });
-    return tripRef.id;
-  }
-
-  async getUserTrips(userId) {
-    const tripsQuery = query(
-      collection(db, 'trips'),
-      where('userId', '==', userId),
-      orderBy('createdAt', 'desc')
-    );
-    return await getDocs(tripsQuery);
-  }
-}
-```
-
-### 3. Authentication System
-```javascript
-// Firebase Auth Context
-export const AuthContext = createContext();
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-    return unsubscribe;
-  }, []);
-
-  const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-```
+📦src
+ ┣ 📂assets
+ ┃ ┗ 📜react.svg
+ ┣ 📂components
+ ┃ ┣ 📂custom
+ ┃ ┃ ┣ 📜Header.jsx
+ ┃ ┃ ┗ 📜Hero.jsx
+ ┃ ┗ 📂ui
+ ┃ ┃ ┣ 📜button.jsx
+ ┃ ┃ ┣ 📜dialog.jsx
+ ┃ ┃ ┣ 📜input.jsx
+ ┃ ┃ ┣ 📜popover.jsx
+ ┃ ┃ ┣ 📜sonner.jsx
+ ┃ ┃ ┗ 📜useParticles.jsx
+ ┣ 📂constants
+ ┃ ┗ 📜option.jsx
+ ┣ 📂create-trip
+ ┃ ┗ 📜index.jsx
+ ┣ 📂lib
+ ┃ ┗ 📜utils.js
+ ┣ 📂my-trips
+ ┃ ┣ 📂components
+ ┃ ┃ ┗ 📜UserTripCardItem.jsx
+ ┃ ┗ 📜index.jsx
+ ┣ 📂service
+ ┃ ┣ 📜AIModel.jsx
+ ┃ ┣ 📜firebaseConfig.jsx
+ ┃ ┗ 📜GlobalApi.jsx
+ ┣ 📂view-trip
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📜Footer.jsx
+ ┃ ┃ ┣ 📜HotelCardItem.jsx
+ ┃ ┃ ┣ 📜Hotels.jsx
+ ┃ ┃ ┣ 📜InfoSection.jsx
+ ┃ ┃ ┣ 📜PlaceCardItem.jsx
+ ┃ ┃ ┗ 📜PlacesToVisit.jsx
+ ┃ ┗ 📂[tripId]
+ ┃ ┃ ┗ 📜index.jsx
+ ┣ 📜App.css
+ ┣ 📜App.jsx
+ ┣ 📜index.css
+ ┗ 📜main.jsx
 
 ---
 
@@ -306,9 +173,9 @@ B.Sc. (Hons) in Computing and Information Systems
 Faculty of Computing, Sabaragamuwa University of Sri Lanka
 
 ### 🌐 Connect with Me
-- **🔗 Portfolio**: [Your Portfolio URL]
-- **🔗 LinkedIn**: [Your LinkedIn Profile]
-- **📧 Email**: [Your Email Address]
+- **🔗 Portfolio**: [https://kasun-portfolio.vercel.app/]
+- **🔗 LinkedIn**: [https://www.linkedin.com/in/kasun-tharaka-5aa740311]
+- **📧 Email**: [kasuntharaka18628@gmail.com]
 
 ### 📚 Academic Background
 - **University**: Sabaragamuwa University of Sri Lanka
@@ -363,12 +230,5 @@ Faculty of Computing, Sabaragamuwa University of Sri Lanka
 - **Shadcn/UI** for accessible component library
 
 ---
-
-## 📞 Support
-
-If you have any questions or need help with setup, please:
-1. Check the [Issues](https://github.com/yourusername/goplanai/issues) page
-2. Create a new issue with detailed description
-3. Contact via email: [Your Email Address]
 
 **Let's build the future of travel planning together!** 🚀
