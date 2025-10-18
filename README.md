@@ -129,6 +129,7 @@ Experience GoPlanAI live here:
  ┗ 📜main.jsx
 
 ---
+```
 
 ## 🤝 Contributing
 
